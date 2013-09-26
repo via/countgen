@@ -60,7 +60,7 @@ module countgen(
         dat_o <= (adr_i == 0) ? countgen_dir : countgen_counters[adr_i - 1];
       else if (stb_i & cyc_i & we_i) begin
         if (adr_i > 0) 
-          countgen_genfreq[adr_i] = dat_i;
+          countgen_genfreq[adr_i - 1] = dat_i;
         else
           countgen_dir <= dat_i[num_io_pins-1:0];
       end

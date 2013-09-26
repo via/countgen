@@ -16,6 +16,7 @@ module countgen_tb();
               .dat_i(dat_i), .dat_o(dat_o), .ack_o(ack),
               .countgen_io(gens));
 
+  assign gens[7] = gens[0];
   initial begin
     $dumpfile("countgen_tb.vcd");
     $dumpvars();
@@ -25,7 +26,7 @@ module countgen_tb();
     cyc = 0;
     stb = 0;
     we = 0;
-    dat_i = 8'hFF;
+    dat_i = 8'h7F;
     #10 rst = 0;
     #10 $display("starting");  
     rst = 0;
@@ -36,13 +37,29 @@ module countgen_tb();
     stb = 0;
     #10 we = 0;
     adr = 1;
-    dat_i = 32'd10;
+    dat_i = 32'd300;
     we = 1;
     stb = 1;
     cyc = 1; 
     #4 cyc = 0;
     stb = 0;
-    #1000 we = 0;
+    #5000 we = 0;
+    adr = 1;
+    dat_i = 32'd280;
+    we = 1;
+    stb = 1;
+    cyc = 1; 
+    #4 cyc = 0;
+    stb = 0;
+    #5000 we = 0;
+    adr = 1;
+    dat_i = 32'd272;
+    we = 1;
+    stb = 1;
+    cyc = 1; 
+    #4 cyc = 0;
+    stb = 0;
+    #5000 we = 0;
     $finish; 
   end
 
