@@ -26,7 +26,7 @@ module countgen(
   input  wire 	    rst_i;         // reset (asynchronous active low)
   input  wire 	    cyc_i;         // cycle
   input  wire 	    stb_i;         // strobe
-  input  wire [3:0] adr_i;         // address
+  input  wire [5:0] adr_i;         // address
   input  wire 	     we_i;          // write enable
   input  wire [31:0] dat_i;         // data input
   output reg [31:0]  dat_o;         // data output
@@ -57,10 +57,10 @@ module countgen(
       countgen_dir <= 0;
     end else 
       if (stb_i & cyc_i & ~we_i) 
-        dat_o <= (adr_i == 0) ? countgen_dir : countgen_counters[adr_i - 1];
+        dat_o <= (adr_i == 0) ? countgen_dir : countgen_counters[(adr_i >> 2) - 1];
       else if (stb_i & cyc_i & we_i) begin
         if (adr_i > 0) 
-          countgen_genfreq[adr_i - 1] = dat_i;
+          countgen_genfreq[(adr_i >> 2) - 1] = dat_i;
         else
           countgen_dir <= dat_i[num_io_pins-1:0];
       end

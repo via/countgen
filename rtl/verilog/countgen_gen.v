@@ -17,7 +17,7 @@ module countgen_generator(
       counter <= 0;
       out <= 0;
     end else begin
-      if (counter < period >> 1) begin
+      if (counter + 1 < period >> 1) begin
         counter <= counter + 1;
         out <= out;
       end else begin

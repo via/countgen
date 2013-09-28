@@ -1,7 +1,7 @@
 module countgen_tb();
 
   reg clk, rst, cyc, stb, we;
-  reg [3:0] adr;
+  reg [5:0] adr;
   reg [31:0] dat_i;
   wire [31:0] dat_o; 
   wire ack;
@@ -36,15 +36,15 @@ module countgen_tb();
     #4 cyc = 0;
     stb = 0;
     #10 we = 0;
-    adr = 1;
-    dat_i = 32'd300;
+    adr = 4;
+    dat_i = 32'd24;
     we = 1;
     stb = 1;
     cyc = 1; 
     #4 cyc = 0;
     stb = 0;
     #5000 we = 0;
-    adr = 1;
+    adr = 4;
     dat_i = 32'd280;
     we = 1;
     stb = 1;
@@ -52,7 +52,8 @@ module countgen_tb();
     #4 cyc = 0;
     stb = 0;
     #5000 we = 0;
-    adr = 1;
+ 
+    adr = 4;
     dat_i = 32'd272;
     we = 1;
     stb = 1;

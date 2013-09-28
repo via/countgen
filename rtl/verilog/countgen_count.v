@@ -18,15 +18,15 @@ module countgen_counter(
   always @(posedge clk) begin
     if (rst) begin
       period <= 0;
-      past <= 0;
+      past <= ~0;
     end else begin
-      if (& past[15:0] && ~(past[scan_window-1:scan_window-16])) begin
-        period <= counter;
+      if (& past[stable_window-1:0] && ~(|past[scan_window-1:scan_window-stable_window])) begin
+        period <= counter + 1;
         counter <= 0;
         past <= ~0;
       end else begin
-        counter <= counter + 1;      
         past <= {past[scan_window - 2:0], in};
+       counter <= counter + 1;      
       end
     end
 
